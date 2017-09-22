@@ -50,8 +50,8 @@ The plugin hooks into the process of Webpack's module resolution and when a file
 
 1. Detect all used icons (using the `prefix`, `globPattern` and `srcDir` options)
 2. For each used icon:
-  1. Find the icon's glyph in FontAwesome's SVG file (using the `faSvg` option)
-  2. Construct a string containing the SVG and CSS statements for the current icon
+    1. Find the icon's glyph in FontAwesome's SVG file (using the `faSvg` option)
+    2. Construct a string containing the SVG and CSS statements for the current icon
 3. Write the SVG to a temporary file, convert it to a ttf, woff, eot and woff2 file
 4. Replace the resolved CSS file with a new, temporary CSS file, which points to the previously created font files
 
