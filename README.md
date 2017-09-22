@@ -70,8 +70,8 @@ Thanks to the awesome [FontAwesome](http://fontawesome.io/) library as well!
 [npm]: https://img.shields.io/npm/v/font-awesome-minify-plugin.svg
 [npm-url]: https://npmjs.com/package/font-awesome-minify-plugin
 
-[node]: https://img.shields.io/node/v/font-awesome-minify-plugin
+[node]: https://img.shields.io/node/v/font-awesome-minify-plugin.svg
 [node-url]: https://nodejs.org
 
-[deps]: https://david-dm.org/dhardtke/font-awesome-minify-plugin
+[deps]: https://david-dm.org/dhardtke/font-awesome-minify-plugin.svg
 [deps-url]: https://david-dm.org/dhardtke/font-awesome-minify-plugin
