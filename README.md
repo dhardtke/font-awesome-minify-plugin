@@ -65,7 +65,7 @@ I would like to express my gratitude towards these projects:
 
 Without them, this plugin wouldn't be possible.
 
-Thanks to the awesome [FontAwesome](http://fontawesome.io/) library as well!
+Thanks to the people behind the awesome [FontAwesome](http://fontawesome.io/) library as well!
 
 [npm]: https://img.shields.io/npm/v/font-awesome-minify-plugin.svg
 [npm-url]: https://npmjs.com/package/font-awesome-minify-plugin
