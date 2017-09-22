@@ -15,7 +15,7 @@ yarn add dev font-awesome-minify-plugin
 
 # Usage
 ```javascript
-const FontAwesomeMinifyPlugin = require("./plugins/font-awesome-minify-plugin");
+const FontAwesomeMinifyPlugin = require("font-awesome-minify-plugin");
 
 module.exports = {
   // ...
