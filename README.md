@@ -10,7 +10,7 @@ A [Webpack](https://webpack.js.org/) Plugin that minifies your included [FontAwe
 ```
 npm install --save-dev font-awesome-minify-plugin
 # or
-yarn add dev font-awesome-minify-plugin
+yarn add --dev font-awesome-minify-plugin
 ```
 
 # Usage
