@@ -4,7 +4,9 @@
 
 Font Awesome Minify Plugin
 --------------------------
-A [Webpack](https://webpack.js.org/) Plugin that minifies your included [FontAwesome](http://fontawesome.io/) CSS and fonts by only bundling the icons you are actually using.
+A [Webpack](https://webpack.js.org/) Plugin that minifies your included [FontAwesome 5](http://fontawesome.com/) CSS and fonts by only bundling the icons you are actually using.
+
+**Notice**: If you are using FontAwesome 4.x, you should be using version _0.1_ of this plugin!
 
 # Install
 ```
@@ -22,11 +24,19 @@ module.exports = {
   plugins: [
     // ...
     new FontAwesomeMinifyPlugin({
-      srcDir: helpers.root("app/"),
-      faSvg: helpers.root("node_modules/font-awesome/fonts/fontawesome-webfont.svg")
+      srcDir: helpers.root("app/")
     })
   ]
 }
+```
+
+TypeScript example:
+
+```typescript
+import "@fortawesome/fontawesome-free-webfonts/css/fontawesome.css";
+import "@fortawesome/fontawesome-free-webfonts/css/fa-regular.css";
+import "@fortawesome/fontawesome-free-webfonts/css/fa-solid.css";
+import "@fortawesome/fontawesome-free-webfonts/css/fa-brands.css";
 ```
 
 # Options
@@ -36,24 +46,23 @@ new FontAwesomeMinifyPlugin(options: object)
 
 |Name                   |Type             |Default                      |Description                                                                                                |
 |:--------------:       |:---------------:|:----------------------------|:----------------------------------------------------------------------------------------------------------|
-|**`cssPattern`**       |`{Regexp}`       |`/font-awesome\.(min\.)?css/`|The regular expression pattern that determines the file to be processed                                    |
 |**`additionalClasses`**|`{Array<String>}`|[]                           |Additional FontAwesome CSS classes that should be included regardless of whether they occur or not         |
 |**`blacklist`**        |`{Array<String>}`|All non-icon classes         |CSS Classes that are prohibited from being included                                                        |
 |**`prefix`**           |`{String}`       |`fa`                         |The icon prefix                                                                                            |
 |**`srcDir`**           |`{String}`       |`./`                         |Determines the folder in which to look for the usage of FontAwesome classes, see `globPattern` as well     |
 |**`globPattern`**      |`{String}`       |`**/*`                       |Determines the [glob](https://github.com/isaacs/node-glob) pattern that determines which files are analyzed|
 |**`debug`**            |`{Boolean}`      |`false`                      |Print additional debug information|
-|**`faSvg`**            |`{String}`       |`""`                         |The path to the SVG file of FontAwesome|
 
 # How it works
-The plugin hooks into the process of Webpack's module resolution and when a file matching the provided `cssPattern` is found it does the following:
+The plugin hooks into the process of Webpack's module resolution and when a file matching any of FontAwesome's CSS filenames is found it does the following:
 
 1. Detect all used icons (using the `prefix`, `globPattern` and `srcDir` options)
-2. For each used icon:
-    1. Find the icon's glyph in FontAwesome's SVG file (using the `faSvg` option)
-    2. Construct a string containing the SVG and CSS statements for the current icon
-3. Write the SVG to a temporary file, convert it to a ttf, woff, eot and woff2 file
-4. Replace the resolved CSS file with a new, temporary CSS file, which points to the previously created font files
+2. Depending on the type of the detected CSS file (either the "fontawesome.css" which contains all codepoints, or a style file, such as "fa-brands.css")
+    1. Main file ("fontawesome.css"): Build a new CSS file that only contains the used codepoints
+    2. Style file (e.g. "fa-brands.css"):
+        1. Extract the SVG path from the file and build a new SVG, containing only the used glyphs
+        2. Create a new CSS file pointing to the new SVG file
+4. Replace the resolved CSS files with the new, temporary CSS files
 
 # Acknowledgments
 I would like to express my gratitude towards these projects:
@@ -62,6 +71,7 @@ I would like to express my gratitude towards these projects:
 - [ttf2eot](https://github.com/fontello/ttf2eot)
 - [ttf2woff](https://github.com/fontello/ttf2woff)
 - [ttf2woff2](https://github.com/nfroidure/ttf2woff2)
+- [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)
 
 Without them, this plugin wouldn't be possible.
 
