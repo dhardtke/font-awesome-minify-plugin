@@ -1,3 +1,11 @@
+<a name="1.0.0"></a>
+# 1.0.0 (2017-12-10)
+
+* (feature) Update the plugin to support and, hence, require FontAwesome 5 ([be4f15e](https://github.com/dhardtke/font-awesome-minify-plugin/commit/be4f15e))
+* Fix README.md ([3a6b6bb](https://github.com/dhardtke/font-awesome-minify-plugin/commit/3a6b6bb))
+
+
+
 # Change Log
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
