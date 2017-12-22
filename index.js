@@ -153,42 +153,47 @@ class FontAwesomeMinifyPlugin {
                 }
             }
 
-            // write new SVG
-            const builder = new xml2js.Builder();
-            const newSvg = builder.buildObject(result);
+            // if no glyphs are used, do not write any font files but an empty CSS
+            if (resultingGlyphs.length == 0) {
+                tempFileCallback.call(this, path.basename(resource), "", true);
+            } else {
+                // write new SVG
+                const builder = new xml2js.Builder();
+                const newSvg = builder.buildObject(result);
 
-            tempFileCallback(path.basename(svgPath), newSvg, false);
+                tempFileCallback.call(this, path.basename(svgPath), newSvg, false);
 
-            // adjust the style css to refer to the new font files
-            const ttfPath = FontAwesomeMinifyPlugin.extractFilePath("ttf", sourceCode);
-            const eotPath = FontAwesomeMinifyPlugin.extractFilePath("eot", sourceCode);
-            const woffPath = FontAwesomeMinifyPlugin.extractFilePath("woff", sourceCode);
-            const woff2Path = FontAwesomeMinifyPlugin.extractFilePath("woff2", sourceCode);
+                // adjust the style css to refer to the new font files
+                const ttfPath = FontAwesomeMinifyPlugin.extractFilePath("ttf", sourceCode);
+                const eotPath = FontAwesomeMinifyPlugin.extractFilePath("eot", sourceCode);
+                const woffPath = FontAwesomeMinifyPlugin.extractFilePath("woff", sourceCode);
+                const woff2Path = FontAwesomeMinifyPlugin.extractFilePath("woff2", sourceCode);
 
-            let newCss = sourceCode;
-            newCss = newCss.split(svgPath).join(`./${path.basename(svgPath)}`);
-            newCss = newCss.split(ttfPath).join(`./${path.basename(ttfPath)}`);
-            newCss = newCss.split(eotPath).join(`./${path.basename(eotPath)}`);
-            newCss = newCss.split(woffPath).join(`./${path.basename(woffPath)}`);
-            newCss = newCss.split(woff2Path).join(`./${path.basename(woff2Path)}`);
+                let newCss = sourceCode;
+                newCss = newCss.split(svgPath).join(`./${path.basename(svgPath)}`);
+                newCss = newCss.split(ttfPath).join(`./${path.basename(ttfPath)}`);
+                newCss = newCss.split(eotPath).join(`./${path.basename(eotPath)}`);
+                newCss = newCss.split(woffPath).join(`./${path.basename(woffPath)}`);
+                newCss = newCss.split(woff2Path).join(`./${path.basename(woff2Path)}`);
 
-            // write new CSS
-            tempFileCallback(path.basename(resource), newCss, true, (tempCssFilepath) => {
-                // write ttf, etc.
-                const cssDirName = path.dirname(tempCssFilepath);
+                // write new CSS
+                tempFileCallback.call(this, path.basename(resource), newCss, true, (tempCssFilepath) => {
+                    // write ttf, etc.
+                    const cssDirName = path.dirname(tempCssFilepath);
 
-                const ttf = svg2ttf(newSvg);
-                fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(ttfPath))), new Buffer(ttf.buffer));
+                    const ttf = svg2ttf(newSvg);
+                    fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(ttfPath))), new Buffer(ttf.buffer));
 
-                const woff = ttf2woff(new Uint8Array(ttf.buffer), {});
-                fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(woffPath))), new Buffer(woff.buffer));
+                    const woff = ttf2woff(new Uint8Array(ttf.buffer), {});
+                    fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(woffPath))), new Buffer(woff.buffer));
 
-                const eot = ttf2eot(new Uint8Array(ttf.buffer));
-                fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(eotPath))), new Buffer(eot.buffer));
+                    const eot = ttf2eot(new Uint8Array(ttf.buffer));
+                    fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(eotPath))), new Buffer(eot.buffer));
 
-                const woff2 = ttf2woff2(new Uint8Array(ttf.buffer));
-                fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(woff2Path))), new Buffer(woff2.buffer));
-            });
+                    const woff2 = ttf2woff2(new Uint8Array(ttf.buffer));
+                    fs.writeFileSync(path.normalize(path.join(cssDirName, path.basename(woff2Path))), new Buffer(woff2.buffer));
+                });
+            }
         });
     }
 
