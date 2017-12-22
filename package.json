@@ -36,9 +36,13 @@
     "xml2js": "^0.4.19"
   },
   "scripts": {
+    "release": "standard-version",
     "version": "conventional-changelog -p font-awesome-minify-plugin -i CHANGELOG.md -s"
   },
   "engines": {
     "node": ">= 4.3 < 5.0.0 || >= 5.10"
+  },
+  "devDependencies": {
+    "standard-version": "^4.2.0"
   }
 }
