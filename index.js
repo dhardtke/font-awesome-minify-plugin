@@ -2,8 +2,9 @@ const glob = require("glob");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
-const rimraf = require("rimraf");
+const crypto = require("crypto");
 
+const rimraf = require("rimraf");
 const xml2js = require("xml2js");
 
 const svg2ttf = require("svg2ttf");
@@ -188,10 +189,8 @@ class FontAwesomeMinifyPlugin {
 
     apply(compiler) {
         // always delete the tmpDir first
-        const tmpDir = path.join(os.tmpdir(), "/", "fontAwesomeMinify");
+        const tmpDir = path.join(os.tmpdir(), "/", `fontAwesomeMinify${crypto.randomBytes(16).toString('hex')}`);
         utils.deleteFolderRecursive(tmpDir);
-
-        // create the folder
         fs.mkdirSync(tmpDir);
 
         let usedIconClasses = null;
