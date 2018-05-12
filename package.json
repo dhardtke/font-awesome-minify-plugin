@@ -24,7 +24,7 @@
   "homepage": "https://github.com/dhardtke/font-awesome-minify-plugin",
   "peerDependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.0",
-    "webpack": "^2 || ^3"
+    "webpack": "^2 || ^3 || ^4"
   },
   "dependencies": {
     "glob": "^7.1.2",
