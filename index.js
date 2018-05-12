@@ -28,7 +28,6 @@ class FontAwesomeMinifyPlugin {
 
     /**
      * Finds the used icon classes, starting with options.prefix in all files matching options.globPattern inside options.srcDir.
-     * @return {Array}
      */
     findUsedIconClasses() {
         const usedIconClasses = [];
@@ -83,11 +82,6 @@ class FontAwesomeMinifyPlugin {
     /**
      * Processes the main css file, usually "fontawesome.css":
      * Creates and writes a new CSS file only containing the codepoints for the used icons.
-     * @param sourceCode
-     * @param usedIcons
-     * @param resource
-     * @param context
-     * @param tempFileCallback
      */
     processMainCss(sourceCode, usedIcons, resource, context, tempFileCallback) {
         // build new CSS
@@ -110,11 +104,6 @@ class FontAwesomeMinifyPlugin {
     /**
      * Processes a CSS file for a style variant of FontAwesome, e.g. "fa-brands.css":
      * Creates and writes a new SVG file only containing the glyphs that are used. Based on that SVG file, a TTF, EOT, WOFF and WOFF2 file is generated.
-     * @param sourceCode
-     * @param usedIcons
-     * @param resource
-     * @param context
-     * @param tempFileCallback
      */
     processStyleCss(sourceCode, usedIcons, resource, context, tempFileCallback) {
         // read normalized svg path
@@ -154,7 +143,7 @@ class FontAwesomeMinifyPlugin {
             }
 
             // if no glyphs are used, do not write any font files but an empty CSS
-            if (resultingGlyphs.length == 0) {
+            if (resultingGlyphs.length === 0) {
                 tempFileCallback.call(this, path.basename(resource), "", true);
             } else {
                 // write new SVG
@@ -223,14 +212,9 @@ class FontAwesomeMinifyPlugin {
 
                 // we do not want to process all files twice, since the changed CSS files stored in tmpDir are also matching the regular expressions
                 if (handler && (!tmpDir || data.context !== tmpDir)) {
-                    // console.info(data.context);
-                    // TODO do we want to process for files in node_modules? CHECK
-
                     // initialize usedIconClasses when the first matching pattern matches
                     if (usedIconClasses === null) {
                         usedIconClasses = this.findUsedIconClasses();
-
-                        // add additional classes from this.options
                         usedIconClasses = this.options.additionalClasses.concat(usedIconClasses);
 
                         if (usedIconClasses.length === 0) {
@@ -271,7 +255,6 @@ class FontAwesomeMinifyPlugin {
         });
 
         compiler.plugin("done", () => {
-            // cleanup temp directory if not in debug
             if (tmpDir && !this.options.debug) {
                 rimraf.sync(tmpDir);
             }
