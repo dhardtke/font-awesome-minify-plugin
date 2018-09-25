@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/dhardtke/font-awesome-minify-plugin/compare/v1.0.4...v1.0.5) (2018-09-25)
+
+
+### Bug Fixes
+
+* Add webpack 4 as peer dependency ([80ee39d](https://github.com/dhardtke/font-awesome-minify-plugin/commit/80ee39d))
+* Always use a random folder name to avoid clashing between multiple compilations ([3261fb1](https://github.com/dhardtke/font-awesome-minify-plugin/commit/3261fb1))
+* Always use a random folder name to avoid clashing between multiple compilations ([cf056b0](https://github.com/dhardtke/font-awesome-minify-plugin/commit/cf056b0))
+* Do not throw exception when analyzing FontAwesome files without used glyphs, write an empty CSS file instead ([c678745](https://github.com/dhardtke/font-awesome-minify-plugin/commit/c678745))
+* **index:** Use new webpack Tapable API when available ([2ca7663](https://github.com/dhardtke/font-awesome-minify-plugin/commit/2ca7663))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/dhardtke/font-awesome-minify-plugin/compare/v1.0.1...v1.0.2) (2018-05-12)
 
