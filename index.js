@@ -195,8 +195,8 @@ class FontAwesomeMinifyPlugin {
 
         let usedIconClasses = null;
 
-        compiler.plugin("normal-module-factory", nmf => {
-            nmf.plugin("after-resolve", (data, cb) => {
+        const normalModuleFactory = nmf => {
+            const afterResolve = (data, cb) => {
                 if (!data) {
                     return cb();
                 }
@@ -250,14 +250,32 @@ class FontAwesomeMinifyPlugin {
                 }
 
                 return cb(null, data);
-            });
-        });
+            };
 
-        compiler.plugin("done", () => {
+            if ("hooks" in compiler) {
+                nmf.hooks.afterResolve.tapAsync("FontAwesomeMinifyPlugin", afterResolve);
+            } else {
+                nmf.plugin("after-resolve", afterResolve);
+            }
+        };
+
+        if ("hooks" in compiler) {
+            compiler.hooks.normalModuleFactory.tap("FontAwesomeMinifyPlugin", normalModuleFactory);
+        } else {
+            compiler.plugin("normal-module-factory", normalModuleFactory);
+        }
+
+        const done = () => {
             if (tmpDir && !this.options.debug) {
                 rimraf.sync(tmpDir);
             }
-        });
+        };
+
+        if ("hooks" in compiler) {
+            compiler.hooks.done.tap("FontAwesomeMinifyPlugin", done);
+        } else {
+            compiler.plugin("done", done);
+        }
     }
 }
 
