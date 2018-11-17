@@ -205,7 +205,7 @@ class FontAwesomeMinifyPlugin {
 
                 if (/fontawesome\.css/.test(data.resource)) {
                     handler = this.processMainCss;
-                } else if (/fa-(solid|regular|brands)\.css/.test(data.resource)) {
+                } else if (/(solid|regular|brands)\.css/.test(data.resource)) {
                     handler = this.processStyleCss;
                 }
 
