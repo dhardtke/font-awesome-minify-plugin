@@ -1,7 +1,7 @@
 {
   "name": "font-awesome-minify-plugin",
   "description": "A Webpack Plugin that reduces the size of FontAwesome to only include icons that are actually used in your application.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "index.js",
   "repository": {
     "type": "git",

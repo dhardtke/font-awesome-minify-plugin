@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.7](https://github.com/dhardtke/font-awesome-minify-plugin/compare/v1.0.6...v1.0.7) (2019-02-25)
+
+
+### Bug Fixes
+
+* Include "light.css" in RegExp for FA Pro, fixes [#3](https://github.com/dhardtke/font-awesome-minify-plugin/issues/3) ([29f48e8](https://github.com/dhardtke/font-awesome-minify-plugin/commit/29f48e8))
+
+
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/dhardtke/font-awesome-minify-plugin/compare/v1.0.5...v1.0.6) (2018-11-17)
 
