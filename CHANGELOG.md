@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.1.0](https://github.com/dhardtke/font-awesome-minify-plugin/compare/v1.0.7...v1.1.0) (2019-08-01)
+
+
+### Features
+
+* Show warning when debugging and no FA CSS file was found ([1bd147d](https://github.com/dhardtke/font-awesome-minify-plugin/commit/1bd147d))
 
 ## [1.0.7](https://github.com/dhardtke/font-awesome-minify-plugin/compare/v1.0.6...v1.0.7) (2019-02-25)
 
