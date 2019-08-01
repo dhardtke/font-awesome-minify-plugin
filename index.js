@@ -194,6 +194,7 @@ class FontAwesomeMinifyPlugin {
         fs.mkdirSync(tmpDir);
 
         let usedIconClasses = null;
+        let matching = false;
 
         const normalModuleFactory = nmf => {
             const afterResolve = (data, cb) => {
@@ -211,6 +212,7 @@ class FontAwesomeMinifyPlugin {
 
                 // we do not want to process all files twice, since the changed CSS files stored in tmpDir are also matching the regular expressions
                 if (handler && data.context !== tmpDir) {
+                    matching = true;
                     // initialize usedIconClasses when the first matching pattern matches
                     if (usedIconClasses === null) {
                         usedIconClasses = this.findUsedIconClasses();
@@ -266,6 +268,10 @@ class FontAwesomeMinifyPlugin {
         const done = () => {
             if (tmpDir && !this.options.debug) {
                 rimraf.sync(tmpDir);
+            }
+
+            if (this.options.debug && !matching) {
+                console.warn("Could not find any Font Awesome CSS file.");
             }
         };
 
