@@ -189,7 +189,7 @@ class FontAwesomeMinifyPlugin {
 
     apply(compiler) {
         // always delete the tmpDir first
-        const tmpDir = path.join(os.tmpdir(), "/", `fontAwesomeMinify${crypto.randomBytes(16).toString('hex')}`);
+        const tmpDir = path.join(os.tmpdir(), "/", `fontAwesomeMinify${crypto.randomBytes(16).toString("hex")}`);
         utils.deleteFolderRecursive(tmpDir);
         fs.mkdirSync(tmpDir);
 
@@ -210,16 +210,14 @@ class FontAwesomeMinifyPlugin {
                 }
 
                 // we do not want to process all files twice, since the changed CSS files stored in tmpDir are also matching the regular expressions
-                if (handler && (!tmpDir || data.context !== tmpDir)) {
+                if (handler && data.context !== tmpDir) {
                     // initialize usedIconClasses when the first matching pattern matches
                     if (usedIconClasses === null) {
                         usedIconClasses = this.findUsedIconClasses();
                         usedIconClasses = this.options.additionalClasses.concat(usedIconClasses);
 
-                        if (usedIconClasses.length === 0) {
-                            if (this.options.debug) {
-                                console.info(`Did not find any icon classes - aborting.`);
-                            }
+                        if (usedIconClasses.length === 0 && this.options.debug) {
+                            console.info(`Did not find any icon classes - aborting.`);
                         }
                     }
 
