@@ -28,10 +28,10 @@
   "dependencies": {
     "glob": "^7.1.2",
     "rimraf": "^2.6.2",
-    "svg2ttf": "^4.1.0",
+    "svg2ttf": "^4.3.0",
     "ttf2eot": "^2.0.0",
     "ttf2woff": "^2.0.1",
-    "ttf2woff2": "^2.0.3",
+    "ttf2woff2": "^3.0.0",
     "xml2js": "^0.4.19"
   },
   "scripts": {
@@ -42,6 +42,6 @@
     "node": ">= 4.3 < 5.0.0 || >= 5.10"
   },
   "devDependencies": {
-    "standard-version": "^5.0.0"
+    "standard-version": "^7.0.0"
   }
 }
