@@ -23,11 +23,11 @@
   "license": "MIT",
   "homepage": "https://github.com/dhardtke/font-awesome-minify-plugin",
   "peerDependencies": {
-    "webpack": "^4 || ^5"
+    "webpack": "^4 || ^5",
+    "@fortawesome/fontawesome-free": "^5"
   },
   "dependencies": {
     "glob": "^7.1.2",
-    "rimraf": "^3.0.0",
     "svg2ttf": "^4.3.0",
     "ttf2eot": "^2.0.0",
     "ttf2woff": "^2.0.1",
@@ -35,13 +35,43 @@
     "xml2js": "^0.4.19"
   },
   "scripts": {
+    "start": "npm run build -- -w",
+    "prebuild": "npm run clean",
+    "build": "cross-env NODE_ENV=production babel src -d dist --ignore \"src/**/*.test.js\" --copy-files",
+    "postbuild": "es-check es5 dist/hmr/hotModuleReplacement.js",
+    "clean": "del-cli dist",
+    "commitlint": "commitlint --from=master",
+    "lint:js": "tslint -c tslint.json src/**/*.ts test/**/*.ts",
+    "lint": "npm run lint:js",
+    "prepare": "npm run build",
     "release": "standard-version",
-    "version": "conventional-changelog -p font-awesome-minify-plugin -i CHANGELOG.md -s"
+    "security": "npm audit",
+    "test:only": "cross-env NODE_ENV=test jest",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "test:coverage": "cross-env NODE_ENV=test jest --collectCoverageFrom=\"src/**/*.js\" --coverage",
+    "test:manual": "npm run build && webpack-dev-server test/manual/src/index.js --open --config test/manual/webpack.config.js",
+    "pretest": "npm run lint",
+    "test": "cross-env NODE_ENV=test npm run test:coverage",
+    "defaults": "webpack-defaults"
   },
   "engines": {
     "node": ">= 11.0"
   },
   "devDependencies": {
-    "standard-version": "^7.0.0"
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@types/glob": "^7.1.1",
+    "@types/jest": "^24.0.25",
+    "@types/webpack": "^4.41.1",
+    "@types/xml2js": "^0.4.5",
+    "cross-env": "^6.0.3",
+    "file-loader": "^5.0.2",
+    "jest": "^24.9.0",
+    "raw-loader": "^4.0.0",
+    "standard-version": "^7.0.0",
+    "ts-jest": "^24.2.0",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5"
   }
 }

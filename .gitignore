@@ -90,3 +90,5 @@ fabric.properties
 
 .idea/workspace.xml
 .idea/tasks.xml
+dist/
+test/chunks

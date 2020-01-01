@@ -1,0 +1,2 @@
+- use custom FA prefix
+  (maybe use SASS _variables.scss or custom preprocessor)
