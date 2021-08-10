@@ -4,6 +4,9 @@
 
 Font Awesome Minify Plugin
 --------------------------
+
+# This project is no longer maintained. Please don't use it anymore!
+
 A [Webpack](https://webpack.js.org/) Plugin that minifies your included [FontAwesome 5](http://fontawesome.com/) CSS and fonts by only bundling the icons you are actually using.
 
 **Notice**: If you are using FontAwesome 4.x, you should be using version _0.1_ of this plugin!
